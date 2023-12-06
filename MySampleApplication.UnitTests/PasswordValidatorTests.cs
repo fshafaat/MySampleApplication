@@ -2,10 +2,16 @@ using MySampleApplication.Helpers;
 
 namespace MySampleApplication.UnitTests
 {
-    public class PasswordValidationHelperTests
+    public class PasswordValidatorTests
     {
+        PasswordValidator _passwordValidator;
+        public PasswordValidatorTests()
+        {
+            _passwordValidator = new PasswordValidator();
+        }
 
         [Theory]
+        [InlineData("", false)]
         [InlineData("password", false)]
         [InlineData("1", false)]
         [InlineData("12", false)]
@@ -14,7 +20,7 @@ namespace MySampleApplication.UnitTests
         [InlineData("Password1234567_", true)]
         public void Password_Must_Be_More_Than_8_Characters(string password, bool expected)
         {
-            bool result = PasswordValidationHelper.IsPasswordValid(password);
+            bool result = _passwordValidator.IsPasswordValid(password);
             result.Should().Be(expected);
         }
 
@@ -25,7 +31,7 @@ namespace MySampleApplication.UnitTests
         [InlineData("Reg__istration12!", true)]
         public void Password_Must_Has_At_Least_One_Capital_Letter(string password, bool expected)
         {
-            bool result = PasswordValidationHelper.IsPasswordValid(password);
+            bool result = _passwordValidator.IsPasswordValid(password);
             result.Should().Be(expected);
         }
 
@@ -37,7 +43,7 @@ namespace MySampleApplication.UnitTests
         [InlineData("Pass_word!", false)]
         public void Password_Must_Has_At_Least_One_Lowercase_Letter(string password, bool expected)
         {
-            bool result = PasswordValidationHelper.IsPasswordValid(password);
+            bool result = _passwordValidator.IsPasswordValid(password);
             result.Should().Be(expected);
         }
 
@@ -49,7 +55,7 @@ namespace MySampleApplication.UnitTests
         [InlineData("Registration12!_", true)]
         public void Password_Must_Has_At_Least_One_Number(string password, bool expected)
         {
-            bool result = PasswordValidationHelper.IsPasswordValid(password);
+            bool result = _passwordValidator.IsPasswordValid(password);
             result.Should().Be(expected);
         }
 
@@ -61,7 +67,7 @@ namespace MySampleApplication.UnitTests
         [InlineData("Registration12!__", true)]
         public void Password_Must_Has_An_Underscore(string password, bool expected)
         {
-            bool result = PasswordValidationHelper.IsPasswordValid(password);
+            bool result = _passwordValidator.IsPasswordValid(password);
             result.Should().Be(expected);
         }
 

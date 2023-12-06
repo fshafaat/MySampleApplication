@@ -3,5 +3,6 @@
 using MySampleApplication.Helpers;
 
 Console.WriteLine("This is a password validation test application.");
-var isValid = PasswordValidationHelper.IsPasswordValid("Password");
+var passwordValidator = new PasswordValidator();
+var isValid = passwordValidator.IsPasswordValid("Password");
 Console.WriteLine(isValid.ToString());
