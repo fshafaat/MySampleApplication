@@ -7,7 +7,14 @@ namespace MySampleApplication.Helpers
         public static bool IsPasswordValid(string password)
         {
             var hasMoreThan8Characters = new Regex(@".{9,}");
-            if (hasMoreThan8Characters.IsMatch(password))
+            var hasACapitalLetter = new Regex(@"[A-Z]+");
+            var hasALowerCaseLetter = new Regex(@"[a-z]+");
+            var hasANumber = new Regex(@"[0-9]+");
+
+            if (hasMoreThan8Characters.IsMatch(password)
+                && hasACapitalLetter.IsMatch(password)
+                && hasALowerCaseLetter.IsMatch(password)
+                && hasANumber.IsMatch(password))
                 return true;
 
             return false;
